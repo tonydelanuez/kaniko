@@ -43,8 +43,9 @@ if [[ $destination == *"gcr"* ]]; then
         --cache="${cache}"
 else
     docker run \
+        -v $HOME/.docker/:/kaniko/.docker/ \
         -v "$context":/workspace \
-        gcr.io/kaniko-project/executor:latest \
+        docker.io/tonydelanuez/kaniko-executor:latest \
         --dockerfile "${dockerfile}" --destination "${destination}" --context dir:///workspace/ \
         --cache="${cache}"
 fi
